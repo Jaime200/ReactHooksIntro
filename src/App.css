@@ -2,7 +2,17 @@
   text-align: center;
 }
 
-.App-logo {
+.bg__light {
+  background-color: #fafafa;
+  color: #252525;
+}
+
+.bg__dark {
+  background-color:#252525;
+  color:  #fafafa;
+}
+
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -35,4 +45,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

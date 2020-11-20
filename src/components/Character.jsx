@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import '../style/Character.css'
-
-const Character = ({ name, image, species , id })=>{
-
+import ThemeContext from "../context/ThemeContext"
+const Character = ({ name, image, species })=>{
+  const {theme} = useContext(ThemeContext);
     return(
-        <div className="Character" >
+        <div className={`Character Character__${theme}`} >
           <img src={image} alt={name} />
           <h1>{name}</h1>
           <p>{species}</p> 

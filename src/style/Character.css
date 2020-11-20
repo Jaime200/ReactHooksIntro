@@ -8,7 +8,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 0 2px #c1bcbc; 
     padding: 10px;
+}
+
+.Character__bg__light{
+    box-shadow: 0 0 2px #c1bcbc; 
+    
     background-color: #f1f1f1;
+}
+
+
+.Character__bg__dark{
+    box-shadow: 0 0 2px #c1bcbc; 
+    
+    
 }
