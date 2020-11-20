@@ -1,0 +1,14 @@
+.Character img {
+    width: 200px;
+    height: auto;
+}
+
+.Character {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 2px #c1bcbc; 
+    padding: 10px;
+    background-color: #f1f1f1;
+}
