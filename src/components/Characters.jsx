@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useReducer, useMemo, useRef, useCallback } from 'react'
+import React, { useState, useReducer, useMemo, useRef, useCallback } from 'react'
 import '../style/Characters.css'
 import Character from './Character'
 import Search from './Search'
+import useCharacters from '../hooks/useCharacters'
 const initialState = {
     favorites : []
 }
@@ -21,7 +22,7 @@ const favoriteReducer = (state, action) =>{
 
 const Characters = ()=>{
     
-    const [characters, setCharacters ] = useState([])
+    const characters = useCharacters("https://rickandmortyapi.com/api/character")
     const [ favorites, dispatch ] = useReducer(favoriteReducer,initialState)
     const [search, setSearch] = useState('')
     const searchInput = useRef(null)
@@ -32,12 +33,7 @@ const Characters = ()=>{
     const handleSearch = useCallback(()=>{
         setSearch(searchInput.current.value);
     },[])
-
-    const fetchData = async () => {
-        const response = await fetch("https://rickandmortyapi.com/api/character");
-        const data = await response.json();
-        setCharacters(data.results);
-    }
+   
 
     const handleClick = favorite =>{
         dispatch({
@@ -56,11 +52,7 @@ const Characters = ()=>{
     })
     ,[characters,search])
 
-    useEffect(   ()=>{
-      
-        fetchData();
-    }, [] ); //Pasamos un arreglo vacio cuano no se tiene 
-             //una variable [escuchando de un cambio]
+
              
     return (
         <>
