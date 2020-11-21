@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useMemo } from 'react'
+import React, { useState, useEffect, useReducer, useMemo, useRef } from 'react'
 import '../style/Characters.css'
 import Character from './Character'
 
@@ -24,9 +24,9 @@ const Characters = ()=>{
     const [characters, setCharacters ] = useState([])
     const [ favorites, dispatch ] = useReducer(favoriteReducer,initialState)
     const [search, setSearch] = useState('')
-    
-    const handleSearch = (event)=>{
-        setSearch(event.target.value);
+    const searchInput = useRef(null)
+    const handleSearch = ()=>{
+        setSearch(searchInput.current.value);
     }
 
     const fetchData = async () => {
@@ -72,7 +72,7 @@ const Characters = ()=>{
         </ul>
 
         <div className="Search">
-            <input type="text" value={search} onChange={handleSearch}/>
+            <input type="text" value={search} ref={searchInput} onChange={handleSearch}/>
         </div>
        
         <div className="Characters">
