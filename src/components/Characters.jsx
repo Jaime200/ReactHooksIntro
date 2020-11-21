@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useReducer, useMemo, useRef } from 'react'
+import React, { useState, useEffect, useReducer, useMemo, useRef, useCallback } from 'react'
 import '../style/Characters.css'
 import Character from './Character'
-
+import Search from './Search'
 const initialState = {
     favorites : []
 }
@@ -25,9 +25,13 @@ const Characters = ()=>{
     const [ favorites, dispatch ] = useReducer(favoriteReducer,initialState)
     const [search, setSearch] = useState('')
     const searchInput = useRef(null)
-    const handleSearch = ()=>{
+    // const handleSearch = ()=>{
+    //     setSearch(searchInput.current.value);
+    // }
+
+    const handleSearch = useCallback(()=>{
         setSearch(searchInput.current.value);
-    }
+    },[])
 
     const fetchData = async () => {
         const response = await fetch("https://rickandmortyapi.com/api/character");
@@ -57,7 +61,7 @@ const Characters = ()=>{
         fetchData();
     }, [] ); //Pasamos un arreglo vacio cuano no se tiene 
              //una variable [escuchando de un cambio]
-             console.log(favorites)
+             
     return (
         <>
         <h1>Lista</h1>
@@ -71,9 +75,10 @@ const Characters = ()=>{
         }
         </ul>
 
-        <div className="Search">
+        {/* <div className="Search">
             <input type="text" value={search} ref={searchInput} onChange={handleSearch}/>
-        </div>
+        </div> */}
+        <Search search= {search} searchInput={searchInput} handleSearch={handleSearch}  />
        
         <div className="Characters">
             {
