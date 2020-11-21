@@ -23,6 +23,12 @@ const Characters = ()=>{
     
     const [characters, setCharacters ] = useState([])
     const [ favorites, dispatch ] = useReducer(favoriteReducer,initialState)
+    const [search, setSearch] = useState('')
+    
+    const handleSearch = (event)=>{
+        setSearch(event.target.value);
+    }
+
     const fetchData = async () => {
         const response = await fetch("https://rickandmortyapi.com/api/character");
         const data = await response.json();
@@ -35,6 +41,10 @@ const Characters = ()=>{
             payload: favorite
         })
     }
+
+    const filterCharacters = characters.filter(character =>{
+        return character.name.toLowerCase().includes(search.toLowerCase())
+    })
 
     useEffect(   ()=>{
       
@@ -54,10 +64,14 @@ const Characters = ()=>{
         })
         }
         </ul>
+
+        <div className="Search">
+            <input type="text" value={search} onChange={handleSearch}/>
+        </div>
        
         <div className="Characters">
             {
-            characters.map((character) => (
+            filterCharacters.map((character) => (
             <Character key={character.id} {...character} handleClick = {handleClick} />
              ))
             }
